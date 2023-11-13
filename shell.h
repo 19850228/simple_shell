@@ -111,7 +111,7 @@ typedef struct builtin
 } builtin_table;
 
 
-/*myshloop.c */
+/*myshell_loop.c */
 int hsh(info_t *, char **);
 int find_builtin(info_t *);
 void find_cmd(info_t *);
@@ -122,7 +122,7 @@ int is_cmd(info_t *, char *);
 char *dup_chars(char *, int, int);
 char *find_path(info_t *, char *, char *);
 
-/*loophsh.c */
+/*myloophsh.c */
 int loophsh(char **);
 
 /*myerrors.c */
