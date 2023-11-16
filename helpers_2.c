@@ -1,9 +1,3 @@
-/*
- * File: helpers_2.c
- * Auth: Flovian owiti
- *       Victor azangu
- */
-
 #include "main.h"
 
 void handle_line(char **line, ssize_t read);
@@ -12,7 +6,7 @@ void logical_ops(char *line, ssize_t *new_len);
 
 /**
  * handle_line - Partitions a line read from standard input as needed.
- * @line: A pointer to a line read from standard input.
+ * @line: pointer to a line read from standard inputs
  * @read: The length of line.
  *
  * Description: Spaces are inserted to separate ";", "||", and "&&".
@@ -22,7 +16,7 @@ void handle_line(char **line, ssize_t read)
 {
 	char *old_line, *new_line;
 	char previous, current, next;
-	size_t i, j;
+	size_t a, j;
 	ssize_t new_len;
 
 	new_len = get_new_len(*line);
@@ -33,13 +27,13 @@ void handle_line(char **line, ssize_t read)
 		return;
 	j = 0;
 	old_line = *line;
-	for (i = 0; old_line[i]; i++)
+	for (a = 0; old_line[a]; a++)
 	{
-		current = old_line[i];
-		next = old_line[i + 1];
-		if (i != 0)
+		current = old_line[a];
+		next = old_line[a + 1];
+		if (a != 0)
 		{
-			previous = old_line[i - 1];
+			previous = old_line[a - 1];
 			if (current == ';')
 			{
 				if (next == ';' && previous != ' ' && previous != ';')
@@ -86,14 +80,14 @@ void handle_line(char **line, ssize_t read)
 		}
 		else if (current == ';')
 		{
-			if (i != 0 && old_line[i - 1] != ' ')
+			if (a != 0 && old_line[a - 1] != ' ')
 				new_line[j++] = ' ';
 			new_line[j++] = ';';
 			if (next != ' ' && next != ';')
 				new_line[j++] = ' ';
 			continue;
 		}
-		new_line[j++] = old_line[i];
+		new_line[j++] = old_line[a];
 	}
 	new_line[j] = '\0';
 
@@ -104,56 +98,56 @@ void handle_line(char **line, ssize_t read)
 /**
  * get_new_len - Gets the new length of a line partitioned
  *               by ";", "||", "&&&", or "#".
- * @line: The line to check.
+ * @line: a line to check.
  *
- * Return: The new length of the line.
+ * Return: a new length of the line.
  *
- * Description: Cuts short lines containing '#' comments with '\0'.
+ * Description: Cuts short line contain '#' comments with '\0'.
  */
 
 ssize_t get_new_len(char *line)
 {
-	size_t i;
+	size_t a;
 	ssize_t new_len = 0;
 	char current, next;
 
-	for (i = 0; line[i]; i++)
+	for (a = 0; line[a]; a++)
 	{
-		current = line[i];
-		next = line[i + 1];
+		current = line[a];
+		next = line[a + 1];
 		if (current == '#')
 		{
-			if (i == 0 || line[i - 1] == ' ')
+			if (a == 0 || line[a - 1] == ' ')
 			{
-				line[i] = '\0';
+				line[a] = '\0';
 				break;
 			}
 		}
-		else if (i != 0)
+		else if (a != 0)
 		{
 			if (current == ';')
 			{
-				if (next == ';' && line[i - 1] != ' ' && line[i - 1] != ';')
+				if (next == ';' && line[a - 1] != ' ' && line[a - 1] != ';')
 				{
 					new_len += 2;
 					continue;
 				}
-				else if (line[i - 1] == ';' && next != ' ')
+				else if (line[a - 1] == ';' && next != ' ')
 				{
 					new_len += 2;
 					continue;
 				}
-				if (line[i - 1] != ' ')
+				if (line[a - 1] != ' ')
 					new_len++;
 				if (next != ' ')
 					new_len++;
 			}
 			else
-				logical_ops(&line[i], &new_len);
+				logical_ops(&line[a], &new_len);
 		}
 		else if (current == ';')
 		{
-			if (i != 0 && line[i - 1] != ' ')
+			if (a != 0 && line[a - 1] != ' ')
 				new_len++;
 			if (next != ' ' && next != ';')
 				new_len++;
@@ -163,9 +157,9 @@ ssize_t get_new_len(char *line)
 	return (new_len);
 }
 /**
- * logical_ops - Checks a line for logical operators "||" or "&&".
- * @line: A pointer to the character to check in the line.
- * @new_len: Pointer to new_len in get_new_len function.
+ * logical_ops - checks a line for logical operators "||" or "&&".
+ * @line: A pointers to the char to check in the line.
+ * @new_len: pointers to new_len in get_new_len func
  */
 void logical_ops(char *line, ssize_t *new_len)
 {

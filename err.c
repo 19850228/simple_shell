@@ -1,9 +1,3 @@
-/*
- * File: err.c
- * Auth: Flovian owiti
- *       Victor azangu
- */
-
 #include "main.h"
 
 int num_len(int num);
@@ -11,8 +5,8 @@ char *_itoa(int num);
 int create_error(char **args, int err);
 
 /**
- * num_len - Counts the digit length of a number.
- * @num: The number to measure.
+ * num_len - count the digit length of a nu.
+ * @num: a number to measure.
  *
  * Return: The digit length.
  */
@@ -40,8 +34,8 @@ int num_len(int num)
 }
 
 /**
- * _itoa - Converts an integer to a string.
- * @num: The integer.
+ * _itoa - convert an integer to a strings.
+ * @num: there integer.
  *
  * Return: The converted string.
  */
@@ -79,9 +73,9 @@ char *_itoa(int num)
 
 
 /**
- * create_error - Writes a custom error message to stderr.
- * @args: An array of arguments.
- * @err: The error value.
+ * create_error - write a custom error message to stderr.
+ * @args: a array of arg.
+ * @err: there error value.
  *
  * Return: The error value.
  */

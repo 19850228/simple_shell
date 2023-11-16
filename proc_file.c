@@ -5,7 +5,7 @@ int proc_file_commands(char *file_path, int *exe_ret);
 
 /**
  * cant_open - If the file does not exist/lacks proper
- * permissions:print a cant open error.
+ * permissions:prints cant open error.
  * @file_path: Path to the supposed file.
  *
  * Return: 127.
@@ -43,7 +43,7 @@ int cant_open(char *file_path)
 
 /**
  * proc_file_commands -Takes a file & attempts to run the commands in it
- * @file_path: Path to the file
+ * @file_path:A Path to the file
  * @exe_ret: Return value of the last executed command
  *
  * Return: If file couldn't be opened - 127
@@ -52,7 +52,7 @@ int cant_open(char *file_path)
  */
 int proc_file_commands(char *file_path, int *exe_ret)
 {
-	ssize_t file, b_read, i;
+	ssize_t file, b_read, z;
 	unsigned int line_size = 0;
 	unsigned int old_size = 120;
 	char *line, **args, **front;
@@ -79,15 +79,15 @@ int proc_file_commands(char *file_path, int *exe_ret)
 		_strcat(line, buffer);
 		old_size = line_size;
 	} while (b_read);
-	for (i = 0; line[i] == '\n'; i++)
-		line[i] = ' ';
-	for (; i < line_size; i++)
+	for (z = 0; line[z] == '\n'; z++)
+		line[z] = ' ';
+	for (; z < line_size; z++)
 	{
-		if (line[i] == '\n')
+		if (line[z] == '\n')
 		{
-			line[i] = ';';
-			for (i += 1; i < line_size && line[i] == '\n'; i++)
-				line[i] = ' ';
+			line[z] = ';';
+			for (z += 1; z < line_size && line[z] == '\n'; z++)
+				line[z] = ' ';
 		}
 	}
 	variable_replacement(&line, exe_ret);
@@ -104,15 +104,15 @@ int proc_file_commands(char *file_path, int *exe_ret)
 	}
 	front = args;
 
-	for (i = 0; args[i]; i++)
+	for (z = 0; args[z]; z++)
 	{
-		if (_strncmp(args[i], ";", 1) == 0)
+		if (_strncmp(args[z], ";", 1) == 0)
 		{
-			free(args[i]);
-			args[i] = NULL;
+			free(args[z]);
+			args[z] = NULL;
 			ret = call_args(args, front, exe_ret);
-			args = &args[++i];
-			i = 0;
+			args = &args[++z];
+			z = 0;
 		}
 	}
 

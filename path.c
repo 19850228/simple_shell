@@ -7,7 +7,7 @@ list_t *get_path_dir(char *path);
  * get_location - Locates a command in the PATH
  * @command: The command to locate
  *
- * Return: If an error occurs or the command cannot be located - NULL
+ * Return: If a error occur or the command cannot be located - NULL
  *         Otherwise - the full pathname of the command
  */
 char *get_location(char *command)
@@ -49,24 +49,24 @@ char *get_location(char *command)
 }
 
 /**
- * fill_path_dir - Copies path but also replaces leading/sandwiched/trailing
+ * fill_path_dir - Copy path but also replaces leading/sandwiched/trailing
  *		   colons (:) with current working directory
- * @path: The colon-separated list of directories
+ * @path: there colon-separated list of directories
  *
  * Return: A copy of path with any leading/sandwiched/trailing colons replaced
  *	   with the current working directory
  */
 char *fill_path_dir(char *path)
 {
-	int i, length = 0;
+	int z, length = 0;
 	char *path_copy, *pwd;
 
 	pwd = *(_getenv("PWD")) + 4;
-	for (i = 0; path[i]; i++)
+	for (z = 0; path[z]; z++)
 	{
-		if (path[i] == ':')
+		if (path[z] == ':')
 		{
-			if (path[i + 1] == ':' || i == 0 || path[i + 1] == '\0')
+			if (path[z + 1] == ':' || z == 0 || path[z + 1] == '\0')
 				length += _strlen(pwd) + 1;
 			else
 				length++;
@@ -78,16 +78,16 @@ char *fill_path_dir(char *path)
 	if (!path_copy)
 		return (NULL);
 	path_copy[0] = '\0';
-	for (i = 0; path[i]; i++)
+	for (z = 0; path[z]; z++)
 	{
-		if (path[i] == ':')
+		if (path[z] == ':')
 		{
-			if (i == 0)
+			if (z == 0)
 			{
 				_strcat(path_copy, pwd);
 				_strcat(path_copy, ":");
 			}
-			else if (path[i + 1] == ':' || path[i + 1] == '\0')
+			else if (path[z + 1] == ':' || path[z + 1] == '\0')
 			{
 				_strcat(path_copy, ":");
 				_strcat(path_copy, pwd);
@@ -97,7 +97,7 @@ char *fill_path_dir(char *path)
 		}
 		else
 		{
-			_strncat(path_copy, &path[i], 1);
+			_strncat(path_copy, &path[z], 1);
 		}
 	}
 	return (path_copy);
@@ -108,7 +108,7 @@ char *fill_path_dir(char *path)
  * directories into a list_s linked list
  * @path: The colon-separated list of directories
  *
- * Return: A pointer to the initialized linked list
+ * Return: A pointers to the initialized linked list
  */
 list_t *get_path_dir(char *path)
 {

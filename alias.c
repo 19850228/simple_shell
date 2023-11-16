@@ -1,9 +1,3 @@
-/*
- * File: built.c
- * Auth: Flovian owiti
- *       Victor azangu
- */
-
 #include "main.h"
 
 int shellby_alias(char **args, char __attribute__((__unused__)) **front);
@@ -11,10 +5,10 @@ void set_alias(char *var_name, char *value);
 void print_alias(alias_t *alias);
 
 /**
- * shellby_alias - Builtin command that either prints all aliases, specific
- * aliases, or sets an alias.
- * @args: An array of arguments.
- * @front: A double pointer to the beginning of args.
+ * shellby_alias - Builtin commands that either print all aliases, specific
+ * aliases, or set a alias.
+ * @args: An array of arg
+ * @front: A double pointer to the beginning of argurments.
  *
  * Return: If an error occurs - -1.
  *         Otherwise - 0.
@@ -22,7 +16,7 @@ void print_alias(alias_t *alias);
 int shellby_alias(char **args, char __attribute__((__unused__)) **front)
 {
 	alias_t *temp = aliases;
-	int i, ret = 0;
+	int a, ret = 0;
 	char *value;
 
 	if (!args[0])
@@ -34,15 +28,15 @@ int shellby_alias(char **args, char __attribute__((__unused__)) **front)
 		}
 		return (ret);
 	}
-	for (i = 0; args[i]; i++)
+	for (a = 0; args[a]; a++)
 	{
 		temp = aliases;
-		value = _strchr(args[i], '=');
+		value = _strchr(args[a], '=');
 		if (!value)
 		{
 			while (temp)
 			{
-				if (_strcmp(args[i], temp->name) == 0)
+				if (_strcmp(args[a], temp->name) == 0)
 				{
 					print_alias(temp);
 					break;
@@ -50,24 +44,24 @@ int shellby_alias(char **args, char __attribute__((__unused__)) **front)
 				temp = temp->next;
 			}
 			if (!temp)
-				ret = create_error(args + i, 1);
+				ret = create_error(args + a, 1);
 		}
 		else
-			set_alias(args[i], value);
+			set_alias(args[a], value);
 	}
 	return (ret);
 }
 
 /**
- * set_alias - Will either set an existing alias 'name' with a new value,
- * 'value' or creates a new alias with 'name' and 'value'.
- * @var_name: Name of the alias.
- * @value: Value of the alias. First character is a '='.
+ * set_alias - Will either set a existing alias 'name' with a new value,
+ * 'value' or create a new alias with 'name' and 'value'.
+ * @var_name: name of  alias.
+ * @value: Value of  alias. First character is a '='.
  */
 void set_alias(char *var_name, char *value)
 {
 	alias_t *temp = aliases;
-	int len, j, k;
+	int len, a, k;
 	char *new_value;
 
 	*value = '\0';
@@ -76,10 +70,10 @@ void set_alias(char *var_name, char *value)
 	new_value = malloc(sizeof(char) * (len + 1));
 	if (!new_value)
 		return;
-	for (j = 0, k = 0; value[j]; j++)
+	for (a = 0, k = 0; value[a]; a++)
 	{
-		if (value[j] != '\'' && value[j] != '"')
-			new_value[k++] = value[j];
+		if (value[a] != '\'' && value[a] != '"')
+			new_value[k++] = value[a];
 	}
 	new_value[k] = '\0';
 	while (temp)
@@ -97,8 +91,8 @@ void set_alias(char *var_name, char *value)
 }
 
 /**
- * print_alias - Prints the alias in the format name='value'.
- * @alias: Pointer to an alias.
+ * print_alias - print there alias in the format name='value'.
+ * @alias: Pointer to  alias.
  */
 void print_alias(alias_t *alias)
 {
@@ -117,26 +111,26 @@ void print_alias(alias_t *alias)
 	free(alias_string);
 }
 /**
- * replace_aliases - Goes through the arguments and replace any matching alias
+ * replace_aliases - Goes through the arg and replace any matching alias
  * with their value.
- * @args: 2D pointer to the arguments.
+ * @args: 2D pointer to the arg.
  *
  * Return: 2D pointer to the arguments.
  */
 char **replace_aliases(char **args)
 {
 	alias_t *temp;
-	int i;
+	int a;
 	char *new_value;
 
 	if (_strcmp(args[0], "alias") == 0)
 		return (args);
-	for (i = 0; args[i]; i++)
+	for (a = 0; args[a]; a++)
 	{
 		temp = aliases;
 		while (temp)
 		{
-			if (_strcmp(args[i], temp->name) == 0)
+			if (_strcmp(args[a], temp->name) == 0)
 			{
 				new_value = malloc(sizeof(char) * (_strlen(temp->value) + 1));
 				if (!new_value)
@@ -145,9 +139,9 @@ char **replace_aliases(char **args)
 					return (NULL);
 				}
 				_strcpy(new_value, temp->value);
-				free(args[i]);
-				args[i] = new_value;
-				i--;
+				free(args[a]);
+				args[a] = new_value;
+				a--;
 				break;
 			}
 			temp = temp->next;

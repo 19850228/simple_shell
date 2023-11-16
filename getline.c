@@ -1,9 +1,3 @@
-/*
- * File: getline.c
- * Auth: Flovian owiti
- *       Victor azangu
- */
-
 #include "main.h"
 
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
@@ -11,10 +5,10 @@ void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 
 /**
- * _realloc - Reallocates a memory block using malloc and free.
- * @ptr: A pointer to the memory previously allocated.
- * @old_size: The size in bytes of the allocated space for ptr.
- * @new_size: The size in bytes for the new memory block.
+ * _realloc - reallocates a memory block using malloc and free.
+ * @ptr: a pointers to the memory previously allocated.
+ * @old_size: the size in bytes of the allocated space for ptr.
+ * @new_size: the size in bytes for the new memory block.
  *
  * Return: If new_size == old_size - ptr.
  *         If new_size == 0 and ptr is not NULL - NULL.
@@ -62,10 +56,10 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 }
 
 /**
- * assign_lineptr - Reassigns the lineptr variable for _getline.
- * @lineptr: A buffer to store an input string.
+ * assign_lineptr - Reassigns the lineptr var for _getline.
+ * @lineptr: A buffer to stores an input string.
  * @n: The size of lineptr.
- * @buffer: The string to assign to lineptr.
+ * @buffer: The strings to assign to lineptr.
  * @b: The size of buffer.
  */
 void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b)
@@ -94,7 +88,7 @@ void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b)
 }
 
 /**
- * _getline - Reads input from a stream.
+ * _getline - Read a input from a stream.
  * @lineptr: A buffer to store the input.
  * @n: The size of lineptr.
  * @stream: The stream to read from.

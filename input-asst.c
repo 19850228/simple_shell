@@ -7,9 +7,9 @@ int handle_args(int *exe_ret);
 int check_args(char **args);
 
 /**
- * get_args - Gets a command from standard input.
- * @line: A buffer to store the command.
- * @exe_ret: The return value of the last executed command.
+ * get_args - Gets a command from standards input.
+ * @line: a buffer to store the command.
+ * @exe_ret: The return value of last executed command.
  *
  * Return: If an error occurs - NULL.
  *         Otherwise - a pointer to the stored command.
@@ -42,10 +42,10 @@ char *get_args(char *line, int *exe_ret)
 }
 
 /**
- * call_args - Partitions operators from commands and calls them.
- * @args: An array of arguments.
- * @front: A double pointer to the beginning of args.
- * @exe_ret: The return value of the parent process' last executed command.
+ * call_args - Partitions operators from command and calls them.
+ * @args: An arrays of arguments.
+ * @front: A double pointers to the beginning of args.
+ * @exe_ret: the return value of the parent process' last executed command.
  *
  * Return: The return value of the last executed command.
  */
@@ -101,15 +101,15 @@ int call_args(char **args, char **front, int *exe_ret)
 
 /**
  * run_args - Calls the execution of a command.
- * @args: An array of arguments.
- * @front: A double pointer to the beginning of args.
+ * @args: an arrays of arg.
+ * @front: there double pointers to the beginning of args.
  * @exe_ret: The return value of the parent process' last executed command.
  *
  * Return: The return value of the last executed command.
  */
 int run_args(char **args, char **front, int *exe_ret)
 {
-	int ret, i;
+	int ret, a;
 	int (*builtin)(char **args, char **front);
 
 	builtin = get_builtin(args[0]);
@@ -128,15 +128,15 @@ int run_args(char **args, char **front, int *exe_ret)
 
 	hist++;
 
-	for (i = 0; args[i]; i++)
-		free(args[i]);
+	for (a = 0; args[a]; a++)
+		free(args[a]);
 
 	return (ret);
 }
 
 /**
  * handle_args - Gets, calls, and runs the execution of a command.
- * @exe_ret: The return value of the parent process' last executed command.
+ * @exe_ret: the return value of the parent process' last executed command.
  *
  * Return: If an end-of-file is read - END_OF_FILE (-2).
  *         If the input cannot be tokenized - -1.
@@ -183,26 +183,26 @@ int handle_args(int *exe_ret)
 
 /**
  * check_args - Checks if there are any leading ';', ';;', '&&', or '||'.
- * @args: 2D pointer to tokenized commands and arguments.
+ * @args: 2D pointers to tokenized commands and arg
  *
  * Return: If a ';', '&&', or '||' is placed at an invalid position - 2.
  *	   Otherwise - 0.
  */
 int check_args(char **args)
 {
-	size_t i;
+	size_t a;
 	char *cur, *nex;
 
-	for (i = 0; args[i]; i++)
+	for (a = 0; args[a]; a++)
 	{
-		cur = args[i];
+		cur = args[a];
 		if (cur[0] == ';' || cur[0] == '&' || cur[0] == '|')
 		{
-			if (i == 0 || cur[1] == ';')
-				return (create_error(&args[i], 2));
-			nex = args[i + 1];
+			if (a == 0 || cur[1] == ';')
+				return (create_error(&args[a], 2));
+			nex = args[a + 1];
 			if (nex && (nex[0] == ';' || nex[0] == '&' || nex[0] == '|'))
-				return (create_error(&args[i + 1], 2));
+				return (create_error(&args[a + 1], 2));
 		}
 	}
 	return (0);

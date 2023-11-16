@@ -1,9 +1,3 @@
-/*
- * File: env.c
- * Auth: Flovian owiti
- *       Victor azangu
- */
-
 #include "main.h"
 
 char **_copyenv(void);
@@ -11,7 +5,7 @@ void free_env(void);
 char **_getenv(const char *var);
 
 /**
- * _copyenv - Creates a copy of the environment.
+ * _copyenv - create a copy of the envir
  *
  * Return: If an error occurs - NULL.
  *         O/w - a double pointer to the new copy.
@@ -48,7 +42,7 @@ char **_copyenv(void)
 }
 
 /**
- * free_env - Frees the the environment copy.
+ * free_env - Frees the the envir copy.
  */
 void free_env(void)
 {
@@ -60,11 +54,11 @@ void free_env(void)
 }
 
 /**
- * _getenv - Gets an environmental variable from the PATH.
- * @var: The name of the environmental variable to get.
+ * _getenv - Get an envir var from the PATH.
+ * @var: The name of the envir var to get.
  *
- * Return: If the environmental variable does not exist - NULL.
- *         Otherwise - a pointer to the environmental variable.
+ * Return: If the envir variable does not exist - NULL.
+ *         Otherwise - a pointers to the envir variable.
  */
 char **_getenv(const char *var)
 {
